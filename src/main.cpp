@@ -3,6 +3,29 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 
+void displayImage(sf::RenderWindow &window, const std::string &filename) {
+  sf::Texture texture;
+  if (!texture.loadFromFile(filename)) {
+    std::cerr << "Failed to load image!" << std::endl;
+    return;
+  }
+
+  sf::Vector2f imageSize(texture.getSize());
+  sf::Sprite sprite(texture);
+  sf::Vector2f windowSize(window.getSize());
+  sf::Vector2f center((windowSize.x - imageSize.x) / 2,
+                      (windowSize.y - imageSize.y) / 2);
+
+  sprite.setPosition(center);
+  window.clear();
+  window.draw(sprite);
+  window.display();
+
+  sf::sleep(sf::seconds(1.0f));
+
+  window.clear();
+}
+
 int main() {
   sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
 
@@ -28,7 +51,7 @@ int main() {
 
   // Set the selected option to 0 (the first option)
   int selectedOption = 0;
-
+  displayImage(window, "includes/image.jpg");
   // Game loop
   while (window.isOpen()) {
     sf::Event event;
