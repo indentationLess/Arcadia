@@ -1,6 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
+#include "game.hpp"
 #include <iostream>
 
 void displayImage(sf::RenderWindow &window, const std::string &filename) {
@@ -27,7 +25,7 @@ void displayImage(sf::RenderWindow &window, const std::string &filename) {
 }
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(800, 600), "My Game");
+  sf::RenderWindow window(sf::VideoMode(800, 600), "Arcadia");
 
   sf::Font font;
   if (!font.loadFromFile("includes/Arial.ttf"))
