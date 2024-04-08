@@ -18,7 +18,7 @@ int main() {
             game.selectedOption = game.menuOptions.size() - 1;
         } else if (event.key.code == sf::Keyboard::Down) {
           game.selectedOption++;
-          if (game.selectedOption >= game.menuOptions.size())
+          if (game.selectedOption >= static_cast<int>(game.menuOptions.size()))
             game.selectedOption = 0;
         } else if (event.key.code == sf::Keyboard::Return) {
           // Launch the selected game here
@@ -31,7 +31,7 @@ int main() {
     // Draw the menu
     game.window.clear();
     game.window.draw(game.menuText);
-    for (int i = 0; i < game.menuOptions.size(); i++)
+    for (size_t i = 0; i < game.menuOptions.size(); i++)
       game.window.draw(game.menuOptions[i]);
     game.window.display();
   }

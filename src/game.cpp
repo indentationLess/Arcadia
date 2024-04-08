@@ -31,12 +31,11 @@ void Game::initWindow() {
   menuText.setPosition(100, 100);
 
   // initialize the menu options
-  std::vector<sf::Text> menuOptions;
+  menuOptions.clear();
   menuOptions.push_back(sf::Text("Game 1", font));
   menuOptions.push_back(sf::Text("Game 2", font));
   menuOptions.push_back(sf::Text("Game 3", font));
-
-  for (int i = 0; i < menuOptions.size(); i++) {
+  for (size_t i = 0; i < menuOptions.size(); i++) {
     menuOptions[i].setFont(font);
     menuOptions[i].setString("Game " + std::to_string(i + 1));
     menuOptions[i].setPosition(150, 150 + i * 50);
@@ -49,8 +48,9 @@ void Game::render() {
   // Draw the menu
   window.clear();
   window.draw(menuText);
-  for (int i = 0; i < menuOptions.size(); i++)
+  for (size_t i = 0; i < menuOptions.size(); i++) {
     window.draw(menuOptions[i]);
+  }
   window.display();
 }
 
