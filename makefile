@@ -1,17 +1,14 @@
-CXX=g++
-RM=rm -f
-CXXFLAGS = -I/path/to/SFML/include -L/path/to/SFML/lib -lsfml-graphics -lsfml-window -lsfml-system
-TARGET=main
-
-.PHONY: all clean
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Iincludes
+LDFLAGS = -Llib -lsfml-graphics -lsfml-window -lsfml-system
+SOURCES = src/main.cpp src/game.cpp
+HEADERS = src/game.hpp
+TARGET = main
 
 all: $(TARGET)
 
-$(TARGET): src/main.cpp
-	$(CXX) $(CXXFLAGS) src/main.cpp -o $(TARGET)
+$(TARGET): $(SOURCES) $(HEADERS)
+	$(CXX) $(CXXFLAGS) $(SOURCES) $(LDFLAGS) -o $(TARGET)
 
 clean:
-	$(RM) $(TARGET)
-
-run:
-	./$(TARGET)
+	rm -f $(TARGET)

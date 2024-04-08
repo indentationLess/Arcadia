@@ -4,19 +4,27 @@
 #include <SFML/Window.hpp>
 
 // for game engine
-class game {
+class Game {
 private:
   // initializing variables
-  // window
-  void initVar();
-  void initWindow();
 
 public:
   // constructors and destructors
-  game();
-  virtual ~game();
+  Game();
+  virtual ~Game();
 
+  // window
+  sf::RenderWindow window;
+  sf::Font font;
+  sf::Text menuText;
+  std::vector<sf::Text> menuOptions;
+  int selectedOption;
+
+  // private func
+  void initVar();
+  void initWindow();
   // functions
   void update();
   void render();
+  void displayImage(sf::RenderWindow &window, const std::string &filename);
 };
