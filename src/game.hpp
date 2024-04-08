@@ -17,8 +17,8 @@ public:
   sf::RenderWindow window;
   sf::Font font;
   sf::Text menuText;
-  std::vector<sf::Text> menuOptions;
   int selectedOption;
+  std::vector<sf::Text> menuOptions;
 
   // private func
   void initVar();
