@@ -254,7 +254,7 @@ void Game::move(char dirX, char dirY) {
 
         for (int my = y - 1; my >= 0; my--) {
           finalPos = sf::Vector2i(x, my);
-  
+
           if (tempMap[x][my] != 0)
             break;
         }

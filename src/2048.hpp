@@ -37,3 +37,11 @@ private:
   void applyMove(sf::Vector2i from, sf::Vector2i to, int dx, int dy);
 };
 } // namespace tw
+
+class TileUtils {
+public:
+  static sf::Color getTileColor(int tile);
+  static sf::Color getTextColor(int tile);
+  static std::string getText(int tile);
+  static int getTextSize(char tile);
+};
