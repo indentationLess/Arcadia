@@ -36,7 +36,7 @@ void Game::Update() {
     if (animClock.getElapsedTime().asSeconds() >= ANIMATION_DURATION) {
       animState = false;
 
-      for (int i = 0; i < moves.size(); i++) {
+      for (size_t i = 0; i < moves.size(); i++) {
         sf::Vector2i f = moves[i].first.first;
         sf::Vector2i t = moves[i].first.second;
 
@@ -95,7 +95,7 @@ void Game::Render(sf::RenderTarget &tgt) {
 
   sf::Vector2i fMargin(FIELD_MARGIN, FIELD_MARGIN);
 
-  for (int i = 0; i < moves.size(); i++) {
+  for (size_t i = 0; i < moves.size(); i++) {
     sf::Vector2i orig = moves[i].first.first;
     sf::Vector2i f = fMargin + orig * (tileSize + TILE_MARGIN);
     sf::Vector2i t = fMargin + moves[i].first.second * (tileSize + TILE_MARGIN);
@@ -152,7 +152,7 @@ void Game::Reset() {
   Spawn();
 }
 
-sf::Color Game::getTileColor(char tile) {
+sf::Color Game::getTileColor(int tile) {
   static const sf::Color colors[] = {
       sf::Color(238, 228, 218, 97), // empty
       sf::Color(238, 228, 218),     // 2^1 == 2
@@ -170,14 +170,13 @@ sf::Color Game::getTileColor(char tile) {
   return colors[tile];
 }
 
-sf::Color Game::getTextColor(char tile) {
+sf::Color Game::getTextColor(int tile) {
   if (tile >= 3) // tile >= 8 (cuz 2^3 == 8)
     return sf::Color(249, 246, 242);
   return sf::Color(119, 110, 101);
 }
 
-std::string Game::getText(char tile) {
-  // this is small optimization - we dont have to use pow()
+std::string Game::getText(int tile) {
   static const std::string text[] = {
       "",     // empty
       "2",    // 2^1 == 2
@@ -255,7 +254,7 @@ void Game::move(char dirX, char dirY) {
 
         for (int my = y - 1; my >= 0; my--) {
           finalPos = sf::Vector2i(x, my);
-
+  
           if (tempMap[x][my] != 0)
             break;
         }
