@@ -2,10 +2,7 @@
 #include <iostream>
 
 // public func
-Game::Game() {
-  initVar();
-  initWindow();
-}
+Game::Game() { initVar(); }
 
 Game::~Game() {}
 
@@ -13,33 +10,6 @@ Game::~Game() {}
 void Game::initVar() {
   // initialize variables here
   selectedOption = 0;
-}
-
-void Game::initWindow() {
-  // create the window
-  window.create(sf::VideoMode(800, 600), "My Game");
-
-  // set the framerate limit
-  window.setFramerateLimit(60);
-
-  // load the font
-  font.loadFromFile("includes/Arial.ttf");
-
-  // set the menu text
-  menuText.setFont(font);
-  menuText.setString("Choose a game to play:");
-  menuText.setPosition(100, 100);
-
-  // initialize the menu options
-  menuOptions.clear();
-  menuOptions.push_back(sf::Text("Game 1", font));
-  menuOptions.push_back(sf::Text("Game 2", font));
-  menuOptions.push_back(sf::Text("Game 3", font));
-  for (size_t i = 0; i < menuOptions.size(); i++) {
-    menuOptions[i].setFont(font);
-    menuOptions[i].setString("Game " + std::to_string(i + 1));
-    menuOptions[i].setPosition(150, 150 + i * 50);
-  }
 }
 
 void Game::update() {}
