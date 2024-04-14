@@ -28,7 +28,7 @@ int main() {
     menuOptions[i].setOrigin(textRect.left + textRect.width / 2,
                              textRect.top + textRect.height / 2);
     menuOptions[i].setPosition(
-        sf::Vector2f(window.getSize().x / 2, (i + 1) * 100));
+        sf::Vector2f(window.getSize().x / 2.0f, (i + 1) * 100.0f));
   }
 
   // Game loop
@@ -41,10 +41,12 @@ int main() {
       if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Up) {
           selectedOption--;
+          std::cout << "user pressed the up key" << std::endl;
           if (selectedOption < 0)
             selectedOption = menuOptions.size() - 1;
         } else if (event.key.code == sf::Keyboard::Down) {
           selectedOption++;
+          std::cout << "user pressed the down key" << std::endl;
           if (selectedOption >= static_cast<int>(menuOptions.size()))
             selectedOption = 0;
         } else if (event.key.code == sf::Keyboard::Return) {
