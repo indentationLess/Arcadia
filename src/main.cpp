@@ -18,12 +18,14 @@ int main() {
 
   sf::Text option1("Start 2048 Game", font, 24);
   sf::Text option2("Start Pong Game", font, 24);
-  sf::Text option3("Exit", font, 24);
+  sf::Text option3("Minesweeper", font, 24);
+  sf::Text option4("Exit", font, 24);
 
   // Position the menu options
   option1.setPosition(sf::Vector2f(window.getSize().x / 2.0f, 200.0f));
   option2.setPosition(sf::Vector2f(window.getSize().x / 2.0f, 300.0f));
   option3.setPosition(sf::Vector2f(window.getSize().x / 2.0f, 400.0f));
+  option4.setPosition(sf::Vector2f(window.getSize().x / 2.0f, 500.0f));
 
   // Game loop
   while (window.isOpen()) {
@@ -36,10 +38,10 @@ int main() {
         if (event.key.code == sf::Keyboard::Up) {
           selectedOption--;
           if (selectedOption < 0)
-            selectedOption = 2;
+            selectedOption = 3;
         } else if (event.key.code == sf::Keyboard::Down) {
           selectedOption++;
-          if (selectedOption > 2)
+          if (selectedOption > 3)
             selectedOption = 0;
         } else if (event.key.code == sf::Keyboard::Return) {
           // Launch the selected game here
@@ -64,7 +66,12 @@ int main() {
           } else if (selectedOption == 1) {
             std::cout << "Starting Pong Game..." << std::endl;
             pong::runPongGame();
-          } else if (selectedOption == 2) {
+          } 
+            else if (selectedOption == 2) {
+             std::cout << "Starting Minesweeper Game..." << std::endl;
+
+          }            
+            else if (selectedOption == 3) {
             std::cout << "Exiting..." << std::endl;
             window.close();
           }
@@ -80,20 +87,30 @@ int main() {
       option1.setFillColor(sf::Color::Red);
       option2.setFillColor(sf::Color::White);
       option3.setFillColor(sf::Color::White);
+      option4.setFillColor(sf::Color::White);
     } else if (selectedOption == 1) {
       option1.setFillColor(sf::Color::White);
       option2.setFillColor(sf::Color::Red);
       option3.setFillColor(sf::Color::White);
-    } else {
+      option4.setFillColor(sf::Color::White);
+    } else if (selectedOption == 2) {
       option1.setFillColor(sf::Color::White);
       option2.setFillColor(sf::Color::White);
       option3.setFillColor(sf::Color::Red);
+      option4.setFillColor(sf::Color::White);
+    }
+      else {
+      option1.setFillColor(sf::Color::White);
+      option2.setFillColor(sf::Color::White);
+      option3.setFillColor(sf::Color::White);
+      option4.setFillColor(sf::Color::Red);
     }
 
     // Draw the menu options
     window.draw(option1);
     window.draw(option2);
     window.draw(option3);
+    window.draw(option4);
 
     // Display the window
     window.display();
