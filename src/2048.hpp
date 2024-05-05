@@ -1,11 +1,14 @@
 #pragma once
 #include "settings.h"
+#include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 #include <vector>
+
+using namespace sf;
 
 namespace tw {
 class Game {
@@ -17,6 +20,7 @@ public:
 
   void Spawn();
   void Reset();
+  static void run2048Game(sf::Font &font, sf::Event &event);
 
 private:
   int tileSize;
@@ -36,7 +40,7 @@ private:
   void move(char dirX, char dirY);
   void applyMove(sf::Vector2i from, sf::Vector2i to, int dx, int dy);
 };
-} // namespace tw
+
 
 class TileUtils {
 public:
@@ -45,3 +49,4 @@ public:
   static std::string getText(int tile);
   static int getTextSize(char tile);
 };
+} // namespace tw

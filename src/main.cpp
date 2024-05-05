@@ -31,30 +31,16 @@ int main() {
 
   std::vector<MenuItem> menuItems;
 
-  menuItems.emplace_back(MenuItem("Start 2048 Game", font, 
-                                 [&event] {
-                                   sf::RenderWindow gameWindow(sf::VideoMode(500, 600), "2048 Game");
-                                   tw::Game game(gameWindow.getSize().x, gameWindow.getSize().y);
-                                   while (gameWindow.isOpen()) {
-                                     while (gameWindow.pollEvent(event)) {
-                                       if (event.type == sf::Event::Closed)
-                                         gameWindow.close();
-                                       game.OnEvent(event);
-                                     }
-                                     game.Update();
-                                     gameWindow.clear(sf::Color(187, 173, 160));
-                                     game.Render(gameWindow);
-                                     gameWindow.display();
-                                   }
-                                 }));
+  menuItems.emplace_back(MenuItem("Start 2048 Game", font,
+                                  [&font, &event] { tw::Game::run2048Game(font,event); }));
 
   menuItems.emplace_back(MenuItem("Start Pong Game", font, pong::runPongGame));
 
   menuItems.emplace_back(MenuItem("Minesweeper", font, [] {
     std::cout << "Starting Minesweeper Game..." << std::endl;
   }));
-  menuItems.emplace_back(MenuItem("Exit", font, 
-                                 [&window]() { window.close(); }));
+  menuItems.emplace_back(
+      MenuItem("Exit", font, [&window]() { window.close(); }));
 
   for (size_t i = 0; i < menuItems.size(); ++i) {
     menuItems[i].text.setPosition(

@@ -60,6 +60,22 @@ void Game::Update() {
   }
 }
 
+void Game::run2048Game(sf::Font &font, sf::Event &event) {
+  sf::RenderWindow gameWindow(sf::VideoMode(500, 600), "2048 Game");
+  Game game(gameWindow.getSize().x, gameWindow.getSize().y);
+  while (gameWindow.isOpen()) {
+    while (gameWindow.pollEvent(event)) {
+      if (event.type == sf::Event::Closed)
+        gameWindow.close();
+      game.OnEvent(event);
+    }
+    game.Update();
+    gameWindow.clear(sf::Color(187, 173, 160));
+    game.Render(gameWindow);
+    gameWindow.display();
+  }
+}
+
 void Game::Render(sf::RenderTarget &tgt) {
   sf::Text text;
   text.setFont(font);
