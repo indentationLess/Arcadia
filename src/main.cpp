@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "2048.hpp"
-#include "pong.hpp"
+
 
 struct MenuItem {
   sf::Text text;
@@ -34,7 +34,7 @@ int main() {
   menuItems.emplace_back(MenuItem("Start 2048 Game", font,
                                   [&font, &event] { tw::Game::run2048Game(font,event); }));
 
-  menuItems.emplace_back(MenuItem("Start Pong Game", font, pong::runPongGame));
+ // menuItems.emplace_back(MenuItem("Start Pong Game", font, pong::runPongGame));
 
   menuItems.emplace_back(MenuItem("Minesweeper", font, [] {
     std::cout << "Starting Minesweeper Game..." << std::endl;
