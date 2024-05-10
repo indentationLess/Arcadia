@@ -13,15 +13,18 @@ sf::FloatRect Ball::getBallFloatRect() { return BallObject.getGlobalBounds(); }
 
 void Ball::reboundSides() { ballVelocityX = -ballVelocityX; }
 
-void Ball::passTop() { ballVelocityY = -ballVelocityY; }
+void Ball::passTop() { ballPosition.x = 400;
+ballPosition.y = 250; }
 
-void Ball::passBottom() { ballVelocityY = -ballVelocityY; }
+void Ball::passBottom() { ballPosition.x = 400;
+ballPosition.y = 250;
+}
 
 void Ball::intersectBat() { ballVelocityY = -ballVelocityY; }
 
 void Ball::intersectAIBat() { ballVelocityY = -ballVelocityY; }
 
-void Ball::reboundBatorAI() { ballVelocityX = -ballVelocityX; }
+void Ball::reboundBatorAI() { ballVelocityY = -ballVelocityY; }
 
 void Ball::update() {
   ballPosition.x += ballVelocityX;
@@ -35,6 +38,12 @@ void Ball::stop() {
 }
 
 void Ball::go() {
-  ballVelocityX = 0.5f;
-  ballVelocityY = 0.5f;
+  ballVelocityX = 0.1f;
+  ballVelocityY = 0.05f;
+}
+sf::FloatRect Ball::getposition(){
+  return BallObject.getGlobalBounds();
+}
+sf::Vector2f Ball::getcords(){
+  return ballPosition;
 }

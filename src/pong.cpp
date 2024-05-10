@@ -28,6 +28,32 @@ void runPongGame() {
     window.draw(aiBat.getAIBatObject());
     window.draw(ball.getBallObject());
     window.display();
+    if (ball.getposition().left <= 0 || ball.getposition().left + ball.getposition().width >= 800){
+      ball.reboundSides();
+    }
+    if (ball.getposition().top <= 0){
+      ball.passTop();
+    }
+    if (ball.getposition().top + ball.getposition().height >= 600){
+      ball.passBottom();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+      bat.moveBatLeft();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+      bat.moveBatRight();
+    }
+    if (ball.getBallFloatRect().intersects(bat.getBatFloatRect()) || ball.getBallFloatRect().intersects(aiBat.getAIBatFloatRect())){
+      ball.reboundBatorAI();
+    }
+    if (ball.getcords().x - aiBat.getAIBatPosition().x > 35 && aiBat.getAIBatPosition().x + aiBat.getAIBatFloatRect().width < 800 ) 
+    {
+      aiBat.moveAIBatRight();
+    }
+    if (aiBat.getAIBatPosition().x - ball.getcords().x > 35 && aiBat.getAIBatPosition().x > 0)
+    {
+      aiBat.moveAIBatLeft();
+    }
   }
 }
 

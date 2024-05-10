@@ -6,8 +6,8 @@ class Ball {
 private:
   sf::RectangleShape BallObject;
   sf::Vector2f ballPosition;
-  double ballVelocityX = 0.5f;
-  double ballVelocityY = 0.5f;
+  double ballVelocityX = 0.1f;
+  double ballVelocityY = 0.05f;
 
 public:
   Ball(double x, double y);
@@ -22,4 +22,6 @@ public:
   void update();
   void stop();
   void go();
+  sf::FloatRect getposition();
+  sf::Vector2f getcords();
 };
