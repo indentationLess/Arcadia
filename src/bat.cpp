@@ -13,8 +13,12 @@ sf::RectangleShape Bat::getBatObject() { return BatObject; }
 
 sf::FloatRect Bat::getBatFloatRect() { return BatObject.getGlobalBounds(); }
 
-void Bat::moveBatLeft() { batPosition.x -= batSpeed; }
+void Bat::moveBatLeft() { 
+  if (batPosition.x > 0){
+  batPosition.x -= batSpeed;} }
 
-void Bat::moveBatRight() { batPosition.x += batSpeed; }
+void Bat::moveBatRight() { 
+  if (batPosition.x < 650)
+  {batPosition.x += batSpeed;} }
 
 void Bat::update() { BatObject.setPosition(batPosition); }

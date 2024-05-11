@@ -5,7 +5,7 @@
 class AIBat {
 private:
     sf::Vector2f aiBatPosition;
-    double aiBatSpeed = 24;
+    double aiBatSpeed = 0.25f;
     sf::RectangleShape aiBatObject;
 
 public:

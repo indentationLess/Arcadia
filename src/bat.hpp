@@ -5,7 +5,7 @@
 class Bat {
 private:
   sf::Vector2f batPosition;
-  double batSpeed = 0.85f;
+  double batSpeed = 0.25f;
   sf::RectangleShape BatObject;
 
 public:
