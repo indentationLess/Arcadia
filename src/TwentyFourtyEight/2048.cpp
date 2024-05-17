@@ -1,5 +1,7 @@
 #include "2048.hpp"
+#include "../audio.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <memory>
 
 namespace tw {
 Game::Game(int w, int h) {
@@ -17,17 +19,24 @@ void Game::OnEvent(sf::Event e) {
   if (e.type == sf::Event::KeyPressed) {
     if (animState)
       return;
+    static std::unique_ptr<SoundEffect> moveSound =
+        std::make_unique<SoundEffect>("includes/sfx/swipe.wav");
 
     sf::Keyboard::Key kc = e.key.code;
 
-    if (kc == sf::Keyboard::Left || kc == sf::Keyboard::A)
+    if (kc == sf::Keyboard::Left || kc == sf::Keyboard::A) {
       move(-1, 0);
-    else if (kc == sf::Keyboard::Right || kc == sf::Keyboard::D)
+      moveSound->play();
+    } else if (kc == sf::Keyboard::Right || kc == sf::Keyboard::D) {
       move(1, 0);
-    else if (kc == sf::Keyboard::Up || kc == sf::Keyboard::W)
+      moveSound->play();
+    } else if (kc == sf::Keyboard::Up || kc == sf::Keyboard::W) {
       move(0, -1);
-    else if (kc == sf::Keyboard::Down || kc == sf::Keyboard::S)
+      moveSound->play();
+    } else if (kc == sf::Keyboard::Down || kc == sf::Keyboard::S) {
       move(0, 1);
+      moveSound->play();
+    }
   }
 }
 
