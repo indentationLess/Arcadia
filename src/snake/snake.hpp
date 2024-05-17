@@ -1,4 +1,5 @@
 
+#include "../scoreRenderer.hpp"
 #include "../settings.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -6,7 +7,6 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
-
 
 class Snake {
 public:
@@ -99,6 +99,7 @@ bool Snake::checkCollision() {
 }
 
 void Snake::render(sf::RenderWindow &window) {
+  sf::Font font;
   for (const auto &segment : segments) {
     sf::RectangleShape segmentShape(
         sf::Vector2f(snake::CELL_SIZE, snake::CELL_SIZE));
@@ -143,6 +144,7 @@ class snakeGame {
 public:
   snakeGame();
   void run();
+  void addToScore(int points);
 
 private:
   sf::RenderWindow window;
@@ -157,13 +159,13 @@ private:
   void render();
 
   Food food;
-
+  ScoreRenderer scoreRenderer;
   void spawnFood();
 };
 
 snakeGame::snakeGame()
     : window(sf::VideoMode(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT), "Snake"),
-      gameOver(false) {
+      gameOver(false), scoreRenderer(font, 30, sf::Color::White, 10, 10) {
   window.setFramerateLimit(30);
   if (!font.loadFromFile("includes/ClearSans.ttf")) {
     // Handle error
@@ -175,8 +177,12 @@ snakeGame::snakeGame()
   gameOverText.setPosition(snake::WINDOW_WIDTH / 2 - 100,
                            snake::WINDOW_HEIGHT / 2 - 20);
   spawnFood();
+  scoreRenderer.setScore(0);
 }
-
+void snakeGame::addToScore(int points) {
+  int score = points;
+  scoreRenderer.setScore(score);
+}
 void snakeGame::run() {
   while (window.isOpen()) {
     handleEvents();
@@ -216,10 +222,11 @@ void snakeGame::update() {
     if (snake.checkCollision()) {
       gameOver = true;
     }
-
     if (snake.getHeadPosition().x == food.getPosition().x &&
         snake.getHeadPosition().y == food.getPosition().y) {
       snake.grow();
+      scoreRenderer.addToScore(1);
+      std::cout << "Food eaten, score: " << scoreRenderer.m_score << '\n';
       spawnFood();
     }
   }
@@ -232,6 +239,6 @@ void snakeGame::render() {
   if (gameOver) {
     window.draw(gameOverText);
   }
+  scoreRenderer.draw(window, sf::RenderStates::Default);
   window.display();
 }
-
