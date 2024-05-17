@@ -165,7 +165,7 @@ snakeGame::snakeGame()
     : window(sf::VideoMode(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT), "Snake"),
       gameOver(false) {
   window.setFramerateLimit(30);
-  if (!font.loadFromFile("ClearSans.ttf")) {
+  if (!font.loadFromFile("includes/ClearSans.ttf")) {
     // Handle error
   }
   gameOverText.setFont(font);
