@@ -190,14 +190,18 @@ void snakeGame::handleEvents() {
   while (window.pollEvent(event)) {
     if (event.type == sf::Event::Closed) {
       window.close();
+      std::cout << "Window closed event detected\n";
     } else if (event.type == sf::Event::KeyPressed) {
       snake.changeDirection(event.key.code);
+      std::cout << "Key pressed event detected\n";
     }
   }
 }
 
 void snakeGame::spawnFood() {
   food.spawn(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT);
+  std::cout << "Food spawned at: " << food.getPosition().x << ", "
+            << food.getPosition().y << std::endl;
 }
 
 void snakeGame::update() {
