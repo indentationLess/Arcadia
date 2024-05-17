@@ -30,20 +30,20 @@ private:
   int speed;
 };
 
-sf::Vector2i Snake::getHeadPosition() const {
+inline sf::Vector2i Snake::getHeadPosition() const {
   return sf::Vector2i(segments[0].x, segments[0].y);
 }
 
-int Snake::getSpeed() const { return speed; }
+inline int Snake::getSpeed() const { return speed; }
 
-Snake::Snake() {
+inline Snake::Snake() {
   segments.push_back(
       Segment(snake::WINDOW_WIDTH / 2, snake::WINDOW_HEIGHT / 2));
   direction = None;
   speed = snake::INITIAL_SNAKE_SPEED;
 }
 
-void Snake::update() {
+inline void Snake::update() {
   if (direction != None) {
     int newX = segments[0].x;
     int newY = segments[0].y;
@@ -61,13 +61,13 @@ void Snake::update() {
   }
 }
 
-void Snake::grow() {
+inline void Snake::grow() {
   int lastX = segments.back().x;
   int lastY = segments.back().y;
   segments.push_back(Segment(lastX, lastY));
 }
 
-void Snake::changeDirection(sf::Keyboard::Key keyCode) {
+inline void Snake::changeDirection(sf::Keyboard::Key keyCode) {
   if ((keyCode == sf::Keyboard::Up && direction != Down) ||
       (keyCode == sf::Keyboard::Down && direction != Up) ||
       (keyCode == sf::Keyboard::Left && direction != Right) ||
@@ -83,7 +83,7 @@ void Snake::changeDirection(sf::Keyboard::Key keyCode) {
   }
 }
 
-bool Snake::checkCollision() {
+inline bool Snake::checkCollision() {
   int headX = segments[0].x;
   int headY = segments[0].y;
   if (headX < 0 || headX >= snake::WINDOW_WIDTH || headY < 0 ||
@@ -98,7 +98,7 @@ bool Snake::checkCollision() {
   return false;
 }
 
-void Snake::render(sf::RenderWindow &window) {
+inline void Snake::render(sf::RenderWindow &window) {
   sf::Font font;
   for (const auto &segment : segments) {
     sf::RectangleShape segmentShape(
@@ -121,16 +121,16 @@ private:
   sf::RectangleShape shape;
 };
 
-void Food::render(sf::RenderWindow &window) { // Remove 'Food::'
+inline void Food::render(sf::RenderWindow &window) { // Remove 'Food::'
   window.draw(shape);
 }
 
-Food::Food() {
+inline Food::Food() {
   shape.setSize(sf::Vector2f(snake::CELL_SIZE, snake::CELL_SIZE));
   shape.setFillColor(sf::Color::Yellow);
 }
 
-void Food::spawn(int maxWidth, int maxHeight) {
+inline void Food::spawn(int maxWidth, int maxHeight) {
   int x = (rand() % (maxWidth / snake::CELL_SIZE)) * snake::CELL_SIZE;
   int y = (rand() % (maxHeight / snake::CELL_SIZE)) * snake::CELL_SIZE;
   position = sf::Vector2i(x, y);
@@ -138,7 +138,7 @@ void Food::spawn(int maxWidth, int maxHeight) {
                     static_cast<float>(y)); // Update the shape's position
 }
 
-sf::Vector2i Food::getPosition() const { return position; }
+inline sf::Vector2i Food::getPosition() const { return position; }
 
 class snakeGame {
 public:
@@ -163,27 +163,27 @@ private:
   void spawnFood();
 };
 
-snakeGame::snakeGame()
+inline snakeGame::snakeGame()
     : window(sf::VideoMode(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT), "Snake"),
-      gameOver(false), scoreRenderer(font, 30, sf::Color::White, 10, 10) {
-  window.setFramerateLimit(30);
-  if (!font.loadFromFile("includes/ClearSans.ttf")) {
-    // Handle error
-  }
-  gameOverText.setFont(font);
-  gameOverText.setCharacterSize(40);
-  gameOverText.setFillColor(sf::Color::Red);
-  gameOverText.setString("Game Over!");
-  gameOverText.setPosition(snake::WINDOW_WIDTH / 2 - 100,
-                           snake::WINDOW_HEIGHT / 2 - 20);
-  spawnFood();
-  scoreRenderer.setScore(0);
-}
-void snakeGame::addToScore(int points) {
+            gameOver(false), scoreRenderer(font, 30, sf::Color::White, 10, 10) {
+        window.setFramerateLimit(30);
+        if (!font.loadFromFile("includes/ClearSans.ttf")) {
+          // Handle error
+        }
+        gameOverText.setFont(font);
+        gameOverText.setCharacterSize(40);
+        gameOverText.setFillColor(sf::Color::Red);
+        gameOverText.setString("Game Over!");
+        gameOverText.setPosition(snake::WINDOW_WIDTH / 2 - 100,
+                                 static_cast<float>(snake::WINDOW_HEIGHT) / 2 - 20);
+        spawnFood();
+        scoreRenderer.setScore(0);
+      }
+inline void snakeGame::addToScore(int points) {
   int score = points;
   scoreRenderer.setScore(score);
 }
-void snakeGame::run() {
+inline void snakeGame::run() {
   while (window.isOpen()) {
     handleEvents();
     update();
@@ -191,7 +191,7 @@ void snakeGame::run() {
   }
 }
 
-void snakeGame::handleEvents() {
+inline void snakeGame::handleEvents() {
   sf::Event event;
   while (window.pollEvent(event)) {
     if (event.type == sf::Event::Closed) {
@@ -204,13 +204,13 @@ void snakeGame::handleEvents() {
   }
 }
 
-void snakeGame::spawnFood() {
+inline void snakeGame::spawnFood() {
   food.spawn(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT);
   std::cout << "Food spawned at: " << food.getPosition().x << ", "
             << food.getPosition().y << std::endl;
 }
 
-void snakeGame::update() {
+inline void snakeGame::update() {
   if (!gameOver) {
     sf::Time elapsed = clock.restart();
     float dt = elapsed.asSeconds();
@@ -232,7 +232,7 @@ void snakeGame::update() {
   }
 }
 
-void snakeGame::render() {
+inline void snakeGame::render() {
   window.clear(sf::Color::Black);
   snake.render(window);
   food.render(window);
