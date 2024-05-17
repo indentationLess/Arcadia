@@ -1,5 +1,5 @@
 #pragma once
-#include "../settings.hpp"
+#include "../settings.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -40,7 +40,6 @@ private:
   void move(char dirX, char dirY);
   void applyMove(sf::Vector2i from, sf::Vector2i to, int dx, int dy);
 };
-
 
 class TileUtils {
 public:
