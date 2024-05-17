@@ -1,5 +1,6 @@
 #include "TwentyFourtyEight/2048.hpp"
 #include "pong/pong.hpp"
+#include "snake/snake.hpp"
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <functional>
@@ -50,9 +51,11 @@ int main() {
   menuItems.emplace_back(MenuItem("Start 2048 Game", font, [&font, &event] {
     tw::Game::run2048Game(font, event);
   }));
-
+  menuItems.emplace_back(MenuItem("Start Snake Game", font, [&]() {
+    snakeGame game;
+    game.run();
+  }));
   menuItems.emplace_back(MenuItem("Start Pong Game", font, pong::runPongGame));
-
   menuItems.emplace_back(MenuItem("Minesweeper", font, [] {
     std::cout << "Starting Minesweeper Game..." << std::endl;
   }));

@@ -1,5 +1,4 @@
 #include <SFML/Audio.hpp>
-#include <memory>
 class SoundEffect {
 public:
   SoundEffect(const std::string &filePath) {
@@ -26,5 +25,4 @@ public:
 private:
   sf::SoundBuffer m_buffer;
   sf::Sound m_sound;
-  
 };
