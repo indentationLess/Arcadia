@@ -1,8 +1,8 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Iincludes
-LDFLAGS = -Llib -lsfml-graphics -lsfml-window -lsfml-system
-SOURCES = $(wildcard src/*.cpp)
-HEADERS = $(wildcard src/*.hpp) $(wildcard src/*.h)
+CXXFLAGS = -Wall -Iincludes -J -std=c++11 -O2
+LDFLAGS = -Llib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+SOURCES = $(wildcard src/*.cpp) $(wildcard src/pong/*.cpp) $(wildcard src/TwentyFourtyEight/*.cpp)
+HEADERS = $(wildcard src/*.hpp) $(wildcard src/*.h)  $(wildcard src/pong/*.hpp) $(wildcard src/TwentyFourtyEight/*.hpp)
 TARGET = main
 
 all: $(TARGET)

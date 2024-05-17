@@ -1,5 +1,5 @@
 #pragma once
-#include "settings.h"
+#include "../settings.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>

@@ -1,0 +1,7 @@
+
+
+namespace pong {
+
+void runPongGame();
+
+}
