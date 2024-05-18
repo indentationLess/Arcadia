@@ -1,12 +1,13 @@
 #include "TwentyFourtyEight/2048.hpp"
+#include "audio.hpp"
 #include "pong/pong.hpp"
 #include "snake/snake.hpp"
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <functional>
 #include <iostream>
+#include <memory>
 #include <vector>
-
 struct MenuItem {
   sf::Text text;
   std::function<void()> action;
@@ -74,23 +75,28 @@ int main() {
         sf::Vector2f(window.getSize().x / 2.0f,
                      startY + i * 50.0f + textRect.height / 2.0f));
   }
-
+  std::unique_ptr<SoundEffect> hover =
+      std::make_unique<SoundEffect>("includes/sfx/hover.wav");
+  static std::unique_ptr<SoundEffect> choose =
+      std::make_unique<SoundEffect>("includes/sfx/selected.wav");
   // Game loop
   while (window.isOpen()) {
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed)
         window.close();
-
       if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Up) {
           selectedOption--;
+          hover->play();
           if (selectedOption < 0)
             selectedOption = menuItems.size() - 1;
         } else if (event.key.code == sf::Keyboard::Down) {
           selectedOption++;
+          hover->play();
           if (selectedOption >= menuItems.size())
             selectedOption = 0;
         } else if (event.key.code == sf::Keyboard::Return) {
+          choose->play();
           menuItems[selectedOption].action();
         }
       }
