@@ -13,4 +13,3 @@ debug: $(TARGET)
 	gdb $<
 clean:
 	rm -f $(TARGET)
-	.
