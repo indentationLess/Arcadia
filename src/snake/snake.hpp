@@ -140,6 +140,28 @@ inline void Food::spawn(int maxWidth, int maxHeight) {
 
 inline sf::Vector2i Food::getPosition() const { return position; }
 
+class GameOverScreen {
+public:
+  GameOverScreen(sf::Font &font);
+  void show(sf::RenderWindow &window);
+
+private:
+  sf::Text gameOverText;
+};
+
+inline GameOverScreen::GameOverScreen(sf::Font &font) {
+  gameOverText.setFont(font);
+  gameOverText.setCharacterSize(40);
+  gameOverText.setFillColor(sf::Color::Red);
+  gameOverText.setString("Game Over!");
+  gameOverText.setPosition(snake::WINDOW_WIDTH / 2 - 100,
+                           static_cast<float>(snake::WINDOW_HEIGHT) / 2 - 20);
+}
+
+inline void GameOverScreen::show(sf::RenderWindow &window) {
+  window.draw(gameOverText);
+}
+
 class snakeGame {
 public:
   snakeGame();
@@ -151,7 +173,6 @@ private:
   Snake snake;
   sf::Clock clock;
   sf::Font font;
-  sf::Text gameOverText;
   bool gameOver;
 
   void handleEvents();
@@ -160,25 +181,21 @@ private:
 
   Food food;
   ScoreRenderer scoreRenderer;
+  GameOverScreen gameOverScreen;
   void spawnFood();
 };
 
 inline snakeGame::snakeGame()
     : window(sf::VideoMode(snake::WINDOW_WIDTH, snake::WINDOW_HEIGHT), "Snake"),
-            gameOver(false), scoreRenderer(font, 30, sf::Color::White, 10, 10) {
-        window.setFramerateLimit(30);
-        if (!font.loadFromFile("includes/ClearSans.ttf")) {
-          // Handle error
-        }
-        gameOverText.setFont(font);
-        gameOverText.setCharacterSize(40);
-        gameOverText.setFillColor(sf::Color::Red);
-        gameOverText.setString("Game Over!");
-        gameOverText.setPosition(snake::WINDOW_WIDTH / 2 - 100,
-                                 static_cast<float>(snake::WINDOW_HEIGHT) / 2 - 20);
-        spawnFood();
-        scoreRenderer.setScore(0);
-      }
+      gameOver(false), scoreRenderer(font, 30, sf::Color::White, 10, 10),
+      gameOverScreen(font) {
+  window.setFramerateLimit(30);
+  if (!font.loadFromFile("includes/ClearSans.ttf")) {
+    // Handle error
+  }
+  spawnFood();
+  scoreRenderer.setScore(0);
+}
 inline void snakeGame::addToScore(int points) {
   int score = points;
   scoreRenderer.setScore(score);
@@ -237,7 +254,7 @@ inline void snakeGame::render() {
   snake.render(window);
   food.render(window);
   if (gameOver) {
-    window.draw(gameOverText);
+    gameOverScreen.show(window);
   }
   scoreRenderer.draw(window, sf::RenderStates::Default);
   window.display();
