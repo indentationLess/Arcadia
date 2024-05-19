@@ -1,0 +1,6 @@
+
+namespace minesweeper {
+
+void runMinesweeperGame();
+
+}

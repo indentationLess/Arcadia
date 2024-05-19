@@ -1,5 +1,6 @@
 #include "TwentyFourtyEight/2048.hpp"
 #include "audio.hpp"
+#include "minesweeper/minesweeper.hpp"
 #include "pong/pong.hpp"
 #include "snake/snake.hpp"
 #include <SFML/Graphics.hpp>
@@ -59,6 +60,7 @@ int main() {
   menuItems.emplace_back(MenuItem("Start Pong Game", font, pong::runPongGame));
   menuItems.emplace_back(MenuItem("Minesweeper", font, [] {
     std::cout << "Starting Minesweeper Game..." << std::endl;
+    minesweeper::runMinesweeperGame();
   }));
   menuItems.emplace_back(
       MenuItem("Exit", font, [&window]() { window.close(); }));
