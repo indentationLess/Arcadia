@@ -9,10 +9,11 @@ namespace pong {
 
 void runPongGame() {
   sf::RenderWindow window(sf::VideoMode(800, 600), "Pong Game");
-  Bat bat(400, 500);
-  AIBat aiBat(400, 100);
+  Bat bat(300, 500);
+  AIBat aiBat(300, 100);
   Ball ball(400, 250);
-
+ int player_score = 0;
+ int ai_score = 0;
   while (window.isOpen()) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -35,9 +36,11 @@ void runPongGame() {
     }
     if (ball.getposition().top <= 0) {
       ball.passTop();
+      player_score += 1;
     }
     if (ball.getposition().top + ball.getposition().height >= 600) {
       ball.passBottom();
+      ai_score += 1;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
       bat.moveBatLeft();
@@ -53,14 +56,22 @@ void runPongGame() {
               "includes/sfx/jixaw-metal-pipe-falling-sound.mp3");
       moveSound->play();
     }
-    if (ball.getcords().x - aiBat.getAIBatPosition().x > 35 &&
+    if (ball.getcords().x > aiBat.getAIBatPosition().x  &&
         aiBat.getAIBatPosition().x + aiBat.getAIBatFloatRect().width < 800) {
       aiBat.moveAIBatRight();
     }
-    if (aiBat.getAIBatPosition().x - ball.getcords().x > 35 &&
+    if (ball.getcords().x < aiBat.getAIBatPosition().x  &&
         aiBat.getAIBatPosition().x > 0) {
       aiBat.moveAIBatLeft();
     }
+sf::Font font;
+        sf::Text playerScoreText("Player: " + std::to_string(player_score), font, 20);
+        playerScoreText.setPosition(20.f, 20.f);
+        window.draw(playerScoreText);
+
+        sf::Text aiScoreText("AI: " + std::to_string(ai_score), font, 20);
+        aiScoreText.setPosition(window.getSize().x - aiScoreText.getGlobalBounds().width - 20.f, 20.f);
+        window.draw(aiScoreText);
   }
 }
 

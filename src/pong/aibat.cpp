@@ -3,7 +3,7 @@
 AIBat::AIBat(double x, double y) {
   aiBatPosition.x = x;
   aiBatPosition.y = y;
-  aiBatObject.setSize(sf::Vector2f(150, 10));
+  aiBatObject.setSize(sf::Vector2f(100, 10));
   aiBatObject.setPosition(aiBatPosition);
 }
 
@@ -15,10 +15,14 @@ sf::FloatRect AIBat::getAIBatFloatRect() {
   return aiBatObject.getGlobalBounds();
 }
 
-void AIBat::moveAIBatLeft() { aiBatPosition.x -= aiBatSpeed; }
+void AIBat::moveAIBatLeft() { aiBatPosition.x -= aiBatSpeed/2; }
 
-void AIBat::moveAIBatRight() { aiBatPosition.x += aiBatSpeed; }
+void AIBat::moveAIBatRight() { aiBatPosition.x += aiBatSpeed/2; }
+void AIBat::resetAIbatposition() {
+aiBatPosition.x = 300;
+aiBatPosition.y = 100;
 
+}
 void AIBat::update() { aiBatObject.setPosition(aiBatPosition); }
 
 void AIBat::AIBatSpeedReverse() { aiBatSpeed *= -1; }

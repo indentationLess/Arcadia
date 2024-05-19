@@ -4,8 +4,8 @@ class Ball {
 private:
   sf::RectangleShape BallObject;
   sf::Vector2f ballPosition;
-  double ballVelocityX = 0.1f;
-  double ballVelocityY = 0.05f;
+  double ballVelocityX = 0.15f;
+  double ballVelocityY = 0.1f;
 
 public:
   Ball(double x, double y);

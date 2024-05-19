@@ -38,8 +38,8 @@ void Ball::stop() {
 }
 
 void Ball::go() {
-  ballVelocityX = 0.1f;
-  ballVelocityY = 0.05f;
+  ballVelocityX = 0.15f;
+  ballVelocityY = 0.1f;
 }
 sf::FloatRect Ball::getposition(){
   return BallObject.getGlobalBounds();

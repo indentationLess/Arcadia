@@ -13,6 +13,7 @@ public:
     sf::FloatRect getAIBatFloatRect();
     void moveAIBatLeft();
     void moveAIBatRight();
+    void resetAIbatposition();
     void update();
     void AIBatSpeedReverse();
 };

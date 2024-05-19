@@ -13,5 +13,6 @@ public:
   sf::FloatRect getBatFloatRect();
   void moveBatLeft();
   void moveBatRight();
+  void resetbatposition();
   void update();
 };

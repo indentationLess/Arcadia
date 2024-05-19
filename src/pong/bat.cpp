@@ -3,7 +3,7 @@
 Bat::Bat(double x, double y) {
   batPosition.x = x;
   batPosition.y = y;
-  BatObject.setSize(sf::Vector2f(150, 10));
+  BatObject.setSize(sf::Vector2f(100, 10));
   BatObject.setPosition(batPosition);
 }
 
@@ -18,7 +18,11 @@ void Bat::moveBatLeft() {
   batPosition.x -= batSpeed;} }
 
 void Bat::moveBatRight() { 
-  if (batPosition.x < 650)
+  if (batPosition.x  < 700)
   {batPosition.x += batSpeed;} }
+void Bat::resetbatposition(){
+batPosition.x = 300;
+batPosition.y = 500;
+}
 
 void Bat::update() { BatObject.setPosition(batPosition); }
