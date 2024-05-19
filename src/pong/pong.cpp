@@ -34,7 +34,7 @@ void runPongGame() {
     window.draw(ball.getBallObject());
 
     sf::Text playerScoreText("Player: " + std::to_string(player_score), font,
-    20);
+                             20);
     playerScoreText.setPosition(20.f, 20.f);
     window.draw(playerScoreText);
 
@@ -78,23 +78,25 @@ void runPongGame() {
     if (ball.getcords().x < aiBat.getAIBatPosition().x &&
         aiBat.getAIBatPosition().x > 0) {
       aiBat.moveAIBatLeft();
-    if (player_score == 15){
-      ball.stop();
-       sf::Text Win_Screen("YOU WIN!!!!!", font,
-    100);
-    Win_Screen.setPosition(400, 300);
-    Win_Screen.setFillColor(sf::Color::Green);
-    window.draw(Win_Screen);
+      if (player_score == 15) {
+        ball.stop();
+        sf::Text Win_Screen("YOU WIN!!!!!", font, 100);
+        Win_Screen.setPosition(400 - Win_Screen.getGlobalBounds().width / 2,
+                               300);
+        Win_Screen.setFillColor(sf::Color::Green);
+        window.draw(Win_Screen);
+        window.display();
+      }
+      if (ai_score == 15) {
+        ball.stop();
+        sf::Text Lose_Screen("YOU LOSE!!", font, 100);
+        Lose_Screen.setPosition(400 - Lose_Screen.getGlobalBounds().width / 2,
+                                300);
+        Lose_Screen.setFillColor(sf::Color::Red);
+        window.draw(Lose_Screen);
+        window.display();
+      }
     }
-    if (ai_score == 15){
-      ball.stop();
-      sf::Text Lose_Screen("YOU LOOSE!!", font, 100);
-      Lose_Screen.setPosition(400,300);
-      Lose_Screen.setFillColor(sf::Color::Red);
-      window.draw(Lose_Screen);
-    
-    }
-        }
   }
 }
 
